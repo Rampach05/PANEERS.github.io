@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Учет расходов и доходов</title>
+  </head>
+  <body>
+    <h1>Учет расходов и доходов</h1>
+    
+    <h2>Добавить расход</h2>
+    <form>
+      <label for="expense-name">Наименование расхода:</label>
+      <input type="text" id="expense-name" name="expense-name"><br><br>
+      
+      <label for="expense-amount">Сумма расхода:</label>
+      <input type="number" id="expense-amount" name="expense-amount"><br><br>
+      
+      <input type="submit" value="Добавить расход">
+    </form>
+    
+    <h2>Добавить доход</h2>
+    <form>
+      <label for="income-name">Наименование дохода:</label>
+      <input type="text" id="income-name" name="income-name"><br><br>
+      
+      <label for="income-amount">Сумма дохода:</label>
+      <input type="number" id="income-amount" name="income-amount"><br><br>
+      
+      <input type="submit" value="Добавить доход">
+    </form>
+    
+    <h2>Расчет прибыли и убытков</h2>
+    <p>Общий доход: <span id="total-income">0</span></p>
+    <p>Общие расходы: <span id="total-expense">0</span></p>
+    <p>Прибыль/убыток: <span id="profit-loss">0</span></p>
+    
+    <script>
+      // Обработчик добавления расхода
+      document.querySelector('#expense-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Отменяем отправку формы
+        
+        var expenseName = document.querySelector('#expense-name').value;
+        var expenseAmount = document.querySelector('#expense-amount').value;
+        
+        // Добавляем строку с расходом в таблицу
+        var tableRow = document.createElement('tr');
+        tableRow.innerHTML = '<td>' + expenseName + '</td><td>' + expenseAmount + '</td>';
+        document.querySelector('#expense-table').appendChild(tableRow);
+        
+        // Обновляем счетчики расходов и прибыли/убытков
+        var totalExpenses = parseFloat(document.querySelector('#total-expense').textContent);
+        var profitLoss = parseFloat(document.querySelector('#profit-loss').textContent);
+        document.querySelector('#total-expense').textContent = totalExpenses + parseFloat(expenseAmount);
+        document.querySelector('#profit-loss').textContent = profitLoss - parseFloat(expenseAmount);
+      });
+      
+      // Обработчик добавления дохода
+      document.querySelector('#income-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Отменяем отправку формы
+        
+        var incomeName = document.querySelector('#income-name').value;
+        var incomeAmount = document.querySelector
